@@ -9,3 +9,9 @@ load_dotenv()
 
 # up container
 docker-compose up --build --force-recreate
+
+# endpoints
+http://127.0.0.1:8000/api/results/
+http://127.0.0.1:8000/api/results/{id_email}
+http://127.0.0.1:8000/api/results/{id_email}/delete
+http://127.0.0.1:8000/api/all-results/
