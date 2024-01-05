@@ -15,7 +15,7 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 
 
-class EmailVerificationResultListCreateView(generics.ListCreateAPIView) 
+class EmailVerificationResultListCreateView(generics.ListCreateAPIView): 
     queryset = EmailVerificationResult.objects.all()
     serializer_class = EmailVerificationResultSerializer
 
