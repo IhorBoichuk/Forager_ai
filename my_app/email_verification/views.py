@@ -2,6 +2,7 @@
 Module: views.py
 Description: Contains views for handling email verification results.
 """
+from typing import Any
 
 # Imports from my application
 from email_verification.pyhunter import PyHunter
@@ -14,11 +15,11 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 
 
-class EmailVerificationResultListCreateView(generics.ListCreateAPIView):
+class EmailVerificationResultListCreateView(generics.ListCreateAPIView) 
     queryset = EmailVerificationResult.objects.all()
     serializer_class = EmailVerificationResultSerializer
 
-    def create(self, request, *args, **kwargs):
+    def create(self, request: Any, *args: Any, **kwargs: Any) -> Response:
         '''
         Create and verify email
         '''
@@ -48,7 +49,7 @@ class EmailVerificationResultDeleteView(generics.DestroyAPIView):
     serializer_class = EmailVerificationResultSerializer
     lookup_field = 'pk'
 
-    def delete(self, request, *args, **kwargs):
+    def delete(self, request: Any, *args: Any, **kwargs: Any) -> Response:
         '''
         Delete email
         '''
