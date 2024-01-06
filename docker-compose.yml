@@ -4,3 +4,7 @@ services:
     build: ./my_app
     ports:
       - "8000:8000"
+    dns:
+      - 8.8.8.8
+    environment:
+      - API_KEY=fb52a8ecb428cffe6cca32d48eab73fb798c9056
