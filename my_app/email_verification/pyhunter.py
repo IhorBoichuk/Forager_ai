@@ -1,7 +1,7 @@
-""" 
-pyhunter.py
+"""
+pyhunter.py.
 
-Description: This script provides functionality 
+Description: This script provides functionality
 related to hunting pythons in a fictional world.
 """
 
@@ -11,37 +11,17 @@ from email_verification.exceptions import HunterApiError
 
 
 class PyHunter:
-    """
-    PythonHunter class for hunting pythons in a fictional world.
-    """
+    """PythonHunter class for hunting pythons in a fictional world."""
 
     def __init__(self, api_key):
         """
         Initialize a PythonHunter instance.
 
         :param api_key: Your secret API key.You can generate in your dashboard.
-        
         """
         self.api_key = api_key
         self.base_params = {'api_key': api_key}
-        self.base_endpoint = 'https://api.hunter.io/v2/{}'
-
-    def _query_hunter(self, endpoint, params, request_type='get',
-                      payload=None, headers=None, raw=False):
-
-        request_kwargs = dict(params=params, json=payload, headers=headers)
-        res = getattr(requests, request_type)(endpoint, **request_kwargs)
-        res.raise_for_status()
-        if raw:
-            return res
-
-        try:
-            data = res.json()['data']
-        except KeyError:
-            raise HunterApiError(res.json())
-
-        return data
-
+        self.base_endpoint = 'https://api.hunter.io/v2/email_verifier'
 
     def email_verifier(self, email, raw=False):
         """
@@ -53,8 +33,29 @@ class PyHunter:
 
         :return: Full payload of the query as a dict.
         """
-        params = {'email': email, 'api_key': self.api_key}
+        request_params = {'email': email, 'api_key': self.api_key}
 
         endpoint = self.base_endpoint.format('email-verifier')
 
-        return self._query_hunter(endpoint, params, raw=raw)
+        return self._query_hunter(endpoint, params=request_params, raw=raw)
+  
+    def _query_hunter(
+        self, endpoint, request_params, request_type='get', raw=False,
+    ):
+
+        request_kwargs = {
+            'params': request_params,
+            'json': None,
+            'headers': None,
+        }
+        res = getattr(requests, request_type)(endpoint, **request_kwargs)
+        res.raise_for_status()
+        if raw:
+            return res
+
+        try:
+            result_data = res.json()['data']
+        except KeyError:
+            raise HunterApiError(res.json())
+
+        return result_data
