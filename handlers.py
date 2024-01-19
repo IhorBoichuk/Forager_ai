@@ -30,7 +30,7 @@ class Email_Verifier_Handler:
         """
         endpoint: str = "email-verifier"
         params: Dict[str, str] = {'email': email}
-        res = self.api_client._make_request(endpoint, params=params)
+        res = self.api_client.make_request(endpoint, params=params)
         return res.json()
 
 class Domain_Search_Handler:
