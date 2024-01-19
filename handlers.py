@@ -56,7 +56,7 @@ class Domain_Search_Handler:
         """
         endpoint: str = "domain-search"
         params: Dict[str, str] = {'domain': domain}
-        res = self.api_client._make_request(endpoint, params=params)
+        res = self.api_client.make_request(endpoint, params=params)
         return res.json()
 
 class Account_Information_Handler:
