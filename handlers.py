@@ -62,9 +62,9 @@ class DomainSearchHandler:
         Returns:
             JSON response from the API request.
         """
-        endpoint: str = "domain-search"
-        params: Dict[str, str] = {'domain': domain}
-        res = self.api_client._make_request(endpoint, params=params)
+        endpoint: str = 'domain-search'
+        request_params: Dict[str, str] = {'domain': domain}
+        res = self.api_client.make_request(endpoint, params=request_params)
         return res.json()
 
 
